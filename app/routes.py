@@ -43,3 +43,7 @@ def get_entries():
             "timestamp": entry.created_at.isoformat()
         } for entry in entries
     ])
+
+@mood_bp.route("/view")
+def view_moods():
+    return render_template("mood_entries.html")
