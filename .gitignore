@@ -1,0 +1,10 @@
+# Ignore sensitive config
+.env
+config.py
+instance/
+
+# General ignores  
+__pycache__/
+*.pyc
+.DS_Store
+*.log
