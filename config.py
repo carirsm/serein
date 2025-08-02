@@ -1,5 +1,13 @@
 import os
+from dotenv import load_dotenv
 
-# database settings - change database name later - update link as well
-basedir = os.path.abspath(os.path.dirname(__file__))
-DATABASE_URL = "postgresql://postgres:pb112312@localhost:5432/serein_db"
+load_dotenv()
+
+class Config:
+
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    SECRET_KEY = os.getenv('SECRET_KEY')
+
+    DEBUG = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
