@@ -1,6 +1,5 @@
-# Ignore sensitive config
+# Ignore sensitive data
 .env
-config.py
 
 # General ignores  
 __pycache__/
