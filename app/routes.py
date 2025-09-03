@@ -1,8 +1,6 @@
 from flask import Blueprint, request, jsonify, redirect, url_for, render_template, flash, session, current_app
 from .models import MoodLog
 from .database import db
-from datetime import datetime
-
 
 mood_bp = Blueprint("mood", __name__)
 
