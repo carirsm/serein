@@ -11,6 +11,7 @@ class Config:
         f'sqlite:///{os.path.join(basedir, "serein.db")}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    SECRET_KEY = os.getenv('SECRET_KEY')
+    # dev key: local testing
+    SECRET_KEY = os.getenv('SECRET_KEY') or 'dev-key-for-testing'
 
     DEBUG = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
