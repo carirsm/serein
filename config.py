@@ -6,15 +6,13 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 load_dotenv()
 
 class Config:
-
+    # SQLite set as fallback for development
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or \
         f'sqlite:///{os.path.join(basedir, "serein.db")}'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # debug prints
-    _secret_key = os.getenv('SECRET_KEY') or 'dev-key-for-testing'
-    print(f"Using SECRET_KEY from: {'environment' if os.getenv('SECRET_KEY') else 'fallback'}")
+    SECRET_KEY = os.getenv('SECRET_KEY') or 'dev-key-for-testing'
 
-    # dev key: local testing
-    SECRET_KEY = _secret_key
+    # debug mode config
     DEBUG = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
