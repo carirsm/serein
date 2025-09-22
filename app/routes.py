@@ -1,4 +1,6 @@
 from flask import Blueprint, request, jsonify, redirect, url_for, render_template, flash, session, current_app
+from datetime import datetime, timedelta
+from sqlalchemy import desc
 from .models import MoodLog
 from .database import db
 
@@ -44,4 +46,29 @@ def get_entries():
 
 @mood_bp.route("/view")
 def view_moods():
-    return render_template("mood_entries.html")
+
+    page = request.args.get('page', 1, type=int)
+    per_page = 10
+    
+    date_filter = request.args.get('date_filter', 'all')
+    
+    query = MoodLog.query
+
+    if date_filter == 'today':
+        query = query.filter(MoodLog.date == datetime.now().date())
+    elif date_filter == 'week':
+        week_ago = datetime.now().date() - timedelta(days=7)
+        query = query.filter(MoodLog.date >= week_ago)
+    elif date_filter == 'month':
+        month_ago = datetime.now().date() - timedelta(days=30)
+        query = query.filter(MoodLog.date >= month_ago)
+
+    entries = query.order_by(desc(MoodLog.created_at)).paginate(
+        page=page, per_page=per_page, error_out=False
+    )
+    
+    return render_template(
+        'mood_entries.html',
+        entries=entries,
+        date_filter=date_filter
+    )
