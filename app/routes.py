@@ -3,8 +3,14 @@ from datetime import datetime, timedelta
 from sqlalchemy import desc
 from .models import MoodLog
 from .database import db
+import os
 
 mood_bp = Blueprint("mood", __name__)
+
+@mood_bp.before_request
+def before_request():
+    if 'user_id' not in session:
+        session['user_id'] = os.urandom(24).hex()
 
 # Home Route
 @mood_bp.route("/", methods=["GET"])
@@ -50,6 +56,8 @@ def get_entries():
 # View Moods Route
 @mood_bp.route("/view")
 def view_moods():
+    if 'user_id' not in session:
+        session['user_id'] = os.urandom(24).hex()
 
     page = request.args.get('page', 1, type=int)
     per_page = 10
