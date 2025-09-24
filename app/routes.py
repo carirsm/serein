@@ -6,12 +6,14 @@ from .database import db
 
 mood_bp = Blueprint("mood", __name__)
 
+# Home Route
 @mood_bp.route("/", methods=["GET"])
 def home():
     print("HOME route accessed")
     print(f"Template folder: {current_app.template_folder}")
     return render_template("log_mood.html")
 
+# Log Mood Route
 @mood_bp.route("/log", methods=["POST"])
 def log_mood():
     print("LOG route accessed")
@@ -32,6 +34,7 @@ def log_mood():
     print("Flashed success message")
     return redirect(url_for("mood.home"))
 
+# JSON Entry List Route
 @mood_bp.route("/entries", methods=["GET"])
 def get_entries():
     entries = MoodLog.query.order_by(MoodLog.created_at.desc()).all()
@@ -44,6 +47,7 @@ def get_entries():
         } for entry in entries
     ])
 
+# View Moods Route
 @mood_bp.route("/view")
 def view_moods():
 
