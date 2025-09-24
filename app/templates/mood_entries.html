@@ -1,40 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Your Mood Entries</title>
-    <link rel="stylesheet" href="/static/css/style.css">
-</head>
-<body>
-    <h1>Your Logged Moods</h1>
-    <ul id="mood-list"></ul>
+// filepath: /Users/cari/Documents/Coding/serein/app/templates/mood_entries.html
+{% extends "base.html" %}
 
-    <script>
-        function formatDate(isoString) {
-            const options = {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-                hour: "numeric",
-                minute: "2-digit",
-                hour12: true
-            };
-            const date = new Date(isoString);
-            return date.toLocaleString(undefined, options);
-        }
-    
-        fetch('/entries')
-            .then(response => response.json())
-            .then(data => {
-                const list = document.getElementById('mood-list');
-                data.forEach(entry => {
-                    const li = document.createElement('li');
-                    const formattedTime = formatDate(entry.timestamp);
-                    li.textContent = `${formattedTime}: ${entry.mood} - ${entry.reason || 'No reason given'}`;
-                    list.appendChild(li);
-                });
-            })
-            .catch(err => console.error('Error fetching moods:', err));
-    </script>
-    </body>
-</html>
+{% block title %}Your Mood Entries{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Your Logged Moods</h1>
+
+    <!-- Date Filter Buttons -->
+    <div class="mb-3">
+        <label>Filter by:</label>
+        <a href="{{ url_for('mood.view_moods', date_filter='all') }}" 
+           class="btn btn-sm btn-{{ 'primary' if date_filter == 'all' else 'outline-primary' }}">All</a>
+        <a href="{{ url_for('mood.view_moods', date_filter='today') }}"
+           class="btn btn-sm btn-{{ 'primary' if date_filter == 'today' else 'outline-primary' }}">Today</a>
+        <a href="{{ url_for('mood.view_moods', date_filter='week') }}"
+           class="btn btn-sm btn-{{ 'primary' if date_filter == 'week' else 'outline-primary' }}">Past Week</a>
+        <a href="{{ url_for('mood.view_moods', date_filter='month') }}"
+           class="btn btn-sm btn-{{ 'primary' if date_filter == 'month' else 'outline-primary' }}">Past Month</a>
+    </div>
+
+    <!-- Entries List -->
+    <ul id="mood-list" class="list-group">
+        {% if entries.items %}
+            {% for entry in entries.items %}
+                <li class="list-group-item">
+                    <h5 class="mb-1">{{ entry.mood }}</h5>
+                    {% if entry.reason %}
+                        <p class="mb-1">{{ entry.reason }}</p>
+                    {% endif %}
+                    <small class="text-muted">{{ entry.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+                </li>
+            {% endfor %}
+        {% else %}
+            <li class="list-group-item text-center">No mood entries found for this time period.</li>
+        {% endif %}
+    </ul>
+
+    <!-- Pagination Controls -->
+    {% if entries.items and entries.pages > 1 %}
+        <nav aria-label="Page navigation" class="mt-4">
+            <ul class="pagination justify-content-center">
+                {% if entries.has_prev %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('mood.view_moods', page=entries.prev_num, date_filter=date_filter) }}">Previous</a>
+                    </li>
+                {% endif %}
+                
+                {% for page_num in entries.iter_pages(left_edge=2, left_current=2, right_current=3, right_edge=2) %}
+                    {% if page_num %}
+                        <li class="page-item {{ 'active' if page_num == entries.page else '' }}">
+                            <a class="page-link" href="{{ url_for('mood.view_moods', page=page_num, date_filter=date_filter) }}">{{ page_num }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled"><span class="page-link">...</span></li>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if entries.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ url_for('mood.view_moods', page=entries.next_num, date_filter=date_filter) }}">Next</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+</div>
+{% endblock %}
