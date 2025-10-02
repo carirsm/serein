@@ -9,3 +9,8 @@ __pycache__/
 instance/
 *.swp
 flask_session/
+
+# Image files 
+app/static/images/*.jpeg
+app/static/images/*.jpeg
+app/static/images/*.png
