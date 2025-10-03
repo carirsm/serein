@@ -3,10 +3,6 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('/static/images/background.jpg'); /* Optional background image */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 
 /* Form styling */
@@ -31,21 +27,35 @@ select, textarea, button {
     font-size: 14px;
 }
 
+/* Navigation styling */
+ nav {
+    text-align: right;
+    margin: 20px;
+ }
+
 /* Navigation Button Styling */
 .nav-button {
     display: inline-block;
-    padding: 8px 16px;
+    padding: 10px 20px;
     background-color: #4faf50;
     color: white;
     text-decoration: none;
     border-radius: 4px;
     margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
 }
 
 .nav-button:hover {
     background-color: #45a049;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+.nav-button-active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 /* Button styling */
 button {
     background-color: #4CAF50;
