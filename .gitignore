@@ -10,7 +10,10 @@ instance/
 *.swp
 flask_session/
 
+# Development scripts
+*.sh
+reset_flask.sh
+
 # Image files 
-app/static/images/*.jpeg
 app/static/images/*.jpeg
 app/static/images/*.png
