@@ -31,6 +31,21 @@ select, textarea, button {
     font-size: 14px;
 }
 
+/* Navigation Button Styling */
+.nav-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #4faf50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.nav-button:hover {
+    background-color: #45a049;
+}
+
 /* Button styling */
 button {
     background-color: #4CAF50;
