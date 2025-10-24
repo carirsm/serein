@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="mood-stats-container">
+  <h2>Mood Insights</h2>
+  <p>Overview of your logged moods so far:</p>
+
+  <div class="mood-bar-container">
+      <div class="mood-bar good" style="width: {{ data.good }}%"></div>
+      <div class="mood-bar neutral" style="width: {{ data.neutral }}%"></div>
+      <div class="mood-bar bad" style="width: {{ data.bad }}%"></div>
+    </div>
+
+  <p class ="mood-stats">
+    😊 Good: {{ data.good }}% |
+    😐 Neutral: {{ data.neutral }}% |
+    😞 Bad: {{ data.bad }}%
+  </p>
+
+  <a href="{{ url_for('mood.view_moods') }}" class="back-link">← Back to Logged Moods</a>
+</div>
+  {% endblock %}

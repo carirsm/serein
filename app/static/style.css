@@ -90,3 +90,54 @@ button:hover {
 .toast-error {
     background-color: #F44336;
 }
+
+/* Mood Stats Styling */
+
+.mood-stats-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+.mood-bar-container {
+    display: flex;
+    width: 100%;
+    max-width: 400px;
+    height: 25px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+}
+
+.mood-bar {
+    height: 100%;
+}
+
+.mood-bar.good {
+    background-color: #4CAF50;
+}
+
+.mood-bar.neutral {
+    background-color: #FFC107;
+}
+
+.mood-bar.bad {
+    background-color: #F44336;
+}
+
+.mood-stats {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #333;
+}
+
+.back-link:hover {
+    color: #4CAF50;
+}

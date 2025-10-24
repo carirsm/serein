@@ -84,3 +84,24 @@ def view_moods():
         entries=entries,
         date_filter=date_filter
     )
+
+# mood stats route
+@mood_bp.route("/stats")
+def mood_stats():
+    moods = MoodLog.query.all()
+    total = len(moods)
+    if total > 0:
+        good_count = sum(1 for m in moods if m.mood == "good")
+        neutral_count = sum(1 for m in moods if m.mood == "neutral")
+        bad_count = sum(1 for m in moods if m.mood == "bad")
+
+        data = {
+            "good": round((good_count / total) * 100, 1),
+            "neutral": round((neutral_count / total) * 100, 1),
+            "bad": round((bad_count / total) * 100, 1),
+        }
+
+    else:
+        data = {"good": 0, "neutral": 0, "bad": 0}
+
+    return render_template("mood_stats.html", data=data)
