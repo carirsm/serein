@@ -88,7 +88,9 @@ def view_moods():
 # mood stats route
 @mood_bp.route("/stats")
 def mood_stats():
-    moods = MoodLog.query.all()
+    moods = [m for m in MoodLog.query.all()
+             if not (m.reason and 'test' in m.reason.lower())]
+    
     total = len(moods)
     if total > 0:
         good_count = sum(1 for m in moods if m.mood == "good")
