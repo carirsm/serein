@@ -20,7 +20,7 @@
         <a href="{{ url_for('mood.view_moods', date_filter='today') }}"
            class="btn btn-sm btn-{{ 'primary' if date_filter == 'today' else 'outline-primary' }}">Today</a>
         <a href="{{ url_for('mood.view_moods', date_filter='week') }}"
-           class="btn btn-sm btn-{{ 'primary' if date_filter == 'week' else 'outline-primary' }}">Past Week</a>
+           class="btn btn-sm btn-{{ 'primary' if date_filter == 'week' else 'outline-primary' }}">This Week</a>
         <a href="{{ url_for('mood.view_moods', date_filter='month') }}"
            class="btn btn-sm btn-{{ 'primary' if date_filter == 'month' else 'outline-primary' }}">Past Month</a>
     </div>
