@@ -70,11 +70,13 @@ def view_moods():
 
     if date_filter == 'today':
         query = query.filter(MoodLog.date == today)
+
     elif date_filter == 'week':
         current_weekday = today.weekday()
         start_of_week = today - timedelta(days=current_weekday)
         end_of_week = start_of_week + timedelta(days=6)
         query = query.filter(MoodLog.date.between(start_of_week, end_of_week))
+
     elif date_filter == 'month':
         month_ago = datetime.now().date() - timedelta(days=30)
         query = query.filter(MoodLog.date >= month_ago)
