@@ -1,5 +1,5 @@
 from .database import db
-from datetime import datetime, timezone
+from datetime import datetime
 
 class MoodLog(db.Model):
     __tablename__ = 'mood_logs'
