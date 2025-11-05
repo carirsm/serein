@@ -1,143 +1,74 @@
-/* General body styling */
+:root {
+    --primary: #4CAF50;
+    --primary-hover: 45a049;
+    --warning: #FFC107;
+    --danger: #F44336;
+
+}
+
+/* General Styling */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    font-family: 'Inter', Arial, sans-serif;
+    background-color: #f8f9fa;
 }
 
-/* Form styling */
-form {
-    margin: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Label and input styling */
-label {
-    font-weight: bold;
-}
-
-select, textarea, button {
-    margin-top: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-/* Navigation styling */
- nav {
-    text-align: right;
-    margin: 20px;
- }
-
-/* Navigation Button Styling */
-.nav-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #4faf50;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+/* Custom button styles */
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
     transition: all 0.3s ease;
 }
 
-.nav-button:hover {
-    background-color: #45a049;
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
 }
 
-.nav-button-active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-/* Button styling */
-button {
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
+/* Card Styling mood entries */
+.mood-card {
+    transition: transform 0.2s ease;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-button:hover {
-    background-color: #45a049;
+.mood-card:hover {
+    transform: translateY(-2px);
 }
 
-/* Toast message styling */
-#toast {
-    display: none;
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    padding: 15px 30px;
-    border-radius: 8px;
-    z-index: 1000;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: opacity 0.3s ease-in-out;
-}
-
-.toast-success {
-    background-color: #4CAF50;
-}
-
-.toast-error {
-    background-color: #F44336;
-}
-
-/* Mood Stats Styling */
-
-.mood-stats-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-}
+/* Stats styling */
 .mood-bar-container {
-    display: flex;
-    width: 100%;
-    max-width: 400px;
     height: 25px;
-    border-radius: 4px;
+    background-color: #e9ecef;
+    border-radius: 0,25rem;
     overflow: hidden;
-    margin: 20px auto;
-    border: 1px solid #ccc;
 }
 
 .mood-bar {
     height: 100%;
+    transition: width 0.6s ease;
 }
 
-.mood-bar.good {
-    background-color: #4CAF50;
+.mood-bar.good {background-color: var(--primary); }
+.mood-bar.neutral {background-color: var(--warning); }
+.mood-bar.bad {background-color: var(--danger); }
+
+/* Toast Styling */
+
+.toast {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    min-width: 250px;
 }
 
-.mood-bar.neutral {
-    background-color: #FFC107;
-}
-
-.mood-bar.bad {
-    background-color: #F44336;
-}
-
-.mood-stats {
-    margin: 15px 0;
-    text-align: center;
-}
-
-.back-link {
-    display: inline-block;
-    margin-top: 20px;
-    text-decoration: none;
-    color: #333;
-}
-
-.back-link:hover {
-    color: #4CAF50;
+/* Form Styling */
+.form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
